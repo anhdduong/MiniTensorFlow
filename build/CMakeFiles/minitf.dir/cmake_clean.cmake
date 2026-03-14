@@ -1,4 +1,6 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/minitf.dir/src/Node.cpp.o"
+  "CMakeFiles/minitf.dir/src/Node.cpp.o.d"
   "CMakeFiles/minitf.dir/src/Tensor.cpp.o"
   "CMakeFiles/minitf.dir/src/Tensor.cpp.o.d"
   "CMakeFiles/minitf.dir/src/main.cpp.o"

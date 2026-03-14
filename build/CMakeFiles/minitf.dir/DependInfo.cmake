@@ -8,6 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "/home/duong/minitf-cpp/src/Node.cpp" "CMakeFiles/minitf.dir/src/Node.cpp.o" "gcc" "CMakeFiles/minitf.dir/src/Node.cpp.o.d"
   "/home/duong/minitf-cpp/src/Tensor.cpp" "CMakeFiles/minitf.dir/src/Tensor.cpp.o" "gcc" "CMakeFiles/minitf.dir/src/Tensor.cpp.o.d"
   "/home/duong/minitf-cpp/src/main.cpp" "CMakeFiles/minitf.dir/src/main.cpp.o" "gcc" "CMakeFiles/minitf.dir/src/main.cpp.o.d"
   )

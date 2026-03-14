@@ -11,6 +11,8 @@ struct Tensor {
     void print() const;
     void fill(float value);
     void fill(std::vector<float> values);
+    Tensor operator+(const Tensor& other) const;
+    Tensor& operator+=(const Tensor& other);
 
     private:
         int compute_flat_index(std::vector<int> indices) const;

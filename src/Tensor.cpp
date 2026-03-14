@@ -88,3 +88,35 @@ void Tensor::fill(std::vector<float> values) {
         data[i] = values[i];
     }
 }
+
+Tensor Tensor::operator+(const Tensor& other) const{
+    // 1. Check shape match
+    if (other.shape != this->shape) {
+        throw std::invalid_argument("Shape mismatch between this and other.");
+    }
+
+    // 2. Create a new Tensor object
+    Tensor result = Tensor(this->shape);
+
+    // 3. Loop through both data of this and other to add and fill in this new Tensor object
+    for (size_t i = 0; i < this->data.size(); i++) {
+        result.data[i] = other.data[i] + this->data[i];
+    }
+
+    // 4. Return the Tensor
+    return result;
+}
+
+Tensor& Tensor::operator+=(const Tensor& other) {
+    // 1. Check shape match
+    if (other.shape != this->shape) {
+        throw std::invalid_argument("Shape mismatch between this and other.");
+    }
+
+    // 2. Loop through this's data and in-place with the other's data
+    for (size_t i = 0; i < this->data.size(); i++) {
+        this->data[i] += other.data[i];
+    }
+
+    return *this;
+}

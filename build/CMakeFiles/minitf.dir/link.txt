@@ -1,1 +1,1 @@
-/usr/bin/c++ -g CMakeFiles/minitf.dir/src/main.cpp.o CMakeFiles/minitf.dir/src/Tensor.cpp.o -o minitf 
+/usr/bin/c++ -g CMakeFiles/minitf.dir/src/main.cpp.o CMakeFiles/minitf.dir/src/Tensor.cpp.o CMakeFiles/minitf.dir/src/Node.cpp.o -o minitf 

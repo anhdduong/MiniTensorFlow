@@ -1,13 +1,18 @@
 #include <iostream>
 #include "mt/tensor.hpp"
+#include "mt/node.hpp"
 
 int main() {
-    Tensor test({2, 3, 3});
-    float val = 1.0f;
-    for (int i = 0; i < 2; i++)
-        for (int j = 0; j < 3; j++)
-            for (int k = 0; k < 3; k++)
-                test.at({i, j, k}) = val++;
-    test.print();
+    Tensor t({2, 3});
+    t.fill({1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f});
+
+    auto node = Node::make(t);
+
+    std::cout << "data:\n";
+    node->data.print();
+
+    std::cout << "grad:\n";
+    node->grad.print();
+
     return 0;
 }
