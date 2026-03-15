@@ -120,3 +120,24 @@ Tensor& Tensor::operator+=(const Tensor& other) {
 
     return *this;
 }
+
+Tensor Tensor::operator*(const Tensor& other) const {
+    if (other.shape != this->shape) {
+        throw std::invalid_argument("Shape mismatch between this and other.");
+    }
+    Tensor result(this->shape);
+    for (size_t i = 0; i < this->data.size(); i++) {
+        result.data[i] = this->data[i] * other.data[i];
+    }
+    return result;
+}
+
+Tensor& Tensor::operator*=(const Tensor& other) {
+    if (other.shape != this->shape) {
+        throw std::invalid_argument("Shape mismatch between this and other.");
+    }
+    for (size_t i = 0; i < this->data.size(); i++) {
+        this->data[i] *= other.data[i];
+    }
+    return *this;
+}
