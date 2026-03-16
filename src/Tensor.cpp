@@ -2,6 +2,7 @@
 #include <iostream>
 #include <stdexcept>
 #include <string>
+#include <cmath>
 
 Tensor::Tensor(std::vector<int> shape) {
     this->shape = shape;
@@ -121,6 +122,25 @@ Tensor& Tensor::operator+=(const Tensor& other) {
     return *this;
 }
 
+Tensor Tensor::operator-(const Tensor& other) const {
+    if (other.shape != this->shape) {
+        throw std::invalid_argument("Shape mismatch between this and other.");
+    }
+    Tensor result(this->shape);
+    for (size_t i = 0; i < this->data.size(); i++) {
+        result.data[i] = this->data[i] - other.data[i];
+    }
+    return result;
+}
+
+Tensor Tensor::operator*(float scalar) const {
+    Tensor result(this->shape);
+    for (size_t i = 0; i < this->data.size(); i++) {
+        result.data[i] = this->data[i] * scalar;
+    }
+    return result;
+}
+
 Tensor Tensor::operator*(const Tensor& other) const {
     if (other.shape != this->shape) {
         throw std::invalid_argument("Shape mismatch between this and other.");
@@ -157,6 +177,22 @@ Tensor Tensor::sum() const {
         total += data[i];
     }
     result.data[0] = total;
+    return result;
+}
+
+Tensor Tensor::sigmoid() const {
+    Tensor result(shape);
+    for (size_t i = 0; i < data.size(); i++) {
+        result.data[i] = 1.0f / (1.0f + std::exp(-data[i]));
+    }
+    return result;
+}
+
+Tensor Tensor::log_t() const {
+    Tensor result(shape);
+    for (size_t i = 0; i < data.size(); i++) {
+        result.data[i] = std::log(data[i]);
+    }
     return result;
 }
 

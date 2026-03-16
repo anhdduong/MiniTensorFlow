@@ -13,12 +13,16 @@ struct Tensor {
     void fill(std::vector<float> values);
     Tensor operator+(const Tensor& other) const;
     Tensor& operator+=(const Tensor& other);
+    Tensor operator-(const Tensor& other) const;
     Tensor operator*(const Tensor& other) const;
     Tensor& operator*=(const Tensor& other);
+    Tensor operator*(float scalar) const;
     Tensor transpose() const;
     Tensor matmul(const Tensor& other) const;
     Tensor relu() const;
     Tensor sum() const;
+    Tensor sigmoid() const;
+    Tensor log_t() const;
 
     private:
         int compute_flat_index(std::vector<int> indices) const;
