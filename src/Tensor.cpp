@@ -141,3 +141,59 @@ Tensor& Tensor::operator*=(const Tensor& other) {
     }
     return *this;
 }
+
+Tensor Tensor::relu() const {
+    Tensor result(shape);
+    for (size_t i = 0; i < data.size(); i++) {
+        result.data[i] = data[i] > 0.0f ? data[i] : 0.0f;
+    }
+    return result;
+}
+
+Tensor Tensor::sum() const {
+    Tensor result({1});
+    float total = 0.0f;
+    for (size_t i = 0; i < data.size(); i++) {
+        total += data[i];
+    }
+    result.data[0] = total;
+    return result;
+}
+
+Tensor Tensor::matmul(const Tensor& other) const {
+    if (shape.size() != 2 || other.shape.size() != 2) {
+        throw std::invalid_argument("matmul only supports 2D tensors");
+    }
+    int m = shape[0];
+    int k = shape[1];
+    if (other.shape[0] != k) {
+        throw std::invalid_argument("matmul inner dimensions must match");
+    }
+    int n = other.shape[1];
+    Tensor result({m, n});
+    for (int i = 0; i < m; i++) {
+        for (int j = 0; j < n; j++) {
+            float sum = 0.0f;
+            for (int l = 0; l < k; l++) {
+                sum += at({i, l}) * other.at({l, j});
+            }
+            result.at({i, j}) = sum;
+        }
+    }
+    return result;
+}
+
+Tensor Tensor::transpose() const {
+    if (shape.size() != 2) {
+        throw std::invalid_argument("transpose only supports 2D tensors");
+    }
+    int m = shape[0];
+    int n = shape[1];
+    Tensor result({n, m});
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) {
+            result.at({i, j}) = at({j, i});
+        }
+    }
+    return result;
+}

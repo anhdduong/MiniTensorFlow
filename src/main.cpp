@@ -5,35 +5,40 @@
 #include "mt/engine.hpp"
 
 int main() {
-    Tensor t1({2, 3});
-    t1.fill({1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f});
+    // A: {2, 3}, B: {3, 2} — mix of positive and negative values to test relu
+    Tensor ta({2, 3});
+    ta.fill({1.0f, -2.0f, 3.0f,
+             -4.0f, 5.0f, -6.0f});
 
-    Tensor t2({2, 3});
-    t2.fill({7.0f, 8.0f, 9.0f, 10.0f, 11.0f, 12.0f});
+    Tensor tb({3, 2});
+    tb.fill({1.0f,  2.0f,
+             3.0f,  4.0f,
+             5.0f,  6.0f});
 
-    auto a = Node::make(t1);
-    auto b = Node::make(t2);
-    // chain: a * b = c, c + d = e
-    Tensor t3({2, 3});
-    t3.fill(1.0f);
-    auto d = Node::make(t3);
+    auto a = Node::make(ta);
+    auto b = Node::make(tb);
 
-    auto c = mul(a, b);
-    auto e = add(c, d);
+    // loss = sum(relu(matmul(a, b)))
+    auto c    = matmul(a, b);
+    auto r    = relu(c);
+    auto loss = sum(r);
 
-    backward(e);
+    std::cout << "c->data (matmul, shape {2,2}):\n";
+    c->data.print();
 
-    std::cout << "e->data (forward):\n";
-    e->data.print();
+    std::cout << "\nr->data (after relu, shape {2,2}):\n";
+    r->data.print();
 
-    std::cout << "a->grad (should equal b->data):\n";
+    std::cout << "\nloss->data (scalar):\n";
+    loss->data.print();
+
+    backward(loss);
+
+    std::cout << "\na->grad (shape {2,3}):\n";
     a->grad.print();
 
-    std::cout << "b->grad (should equal a->data):\n";
+    std::cout << "\nb->grad (shape {3,2}):\n";
     b->grad.print();
-
-    std::cout << "d->grad (should be all ones):\n";
-    d->grad.print();
 
     return 0;
 }
