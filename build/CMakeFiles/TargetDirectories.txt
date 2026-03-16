@@ -1,3 +1,0 @@
-/home/duong/minitf-cpp/build/CMakeFiles/minitf.dir
-/home/duong/minitf-cpp/build/CMakeFiles/edit_cache.dir
-/home/duong/minitf-cpp/build/CMakeFiles/rebuild_cache.dir
