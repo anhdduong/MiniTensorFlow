@@ -1,6 +1,6 @@
 # MiniTensorFlow
 
-- This is a mini TensorFlow built from scratch in C++ with automatic differentiation, distributed training emulator, and a focus on learning about ML training/inference framework.
+- This is a mini TensorFlow built from scratch in C++ with automatic differentiation, distributed training emulator using threads, and a focus on learning about ML training/inference framework.
 
 - MiniTensorFlow is a deep learning framework written in modern C++ 17. Every components in this project: tensors, autograd, ops, layers, optimizers, and distributed learning is implemented from scratch with no external ML dependencies. The two ultimate goals of this project are to understand how frameworks like TensorFlow and PyTorch work in real applications, and push toward real systems-level distributed training.
 
